@@ -1,0 +1,13 @@
+with open('day6_prob1.txt', 'r') as f:
+#with open('day6_sample.txt', 'r') as f:
+    norn_list = f.read().splitlines()
+    
+# search through the naughty or nice list
+nice = 0
+for child in norn_list:
+    npairs = len(re.findall(r'([a-zA-Z][a-zA-Z]).*\1', child))
+    nrep = len(re.findall(r'([a-zA-Z])[a-zA-Z]\1', child))
+#    print(f'{nvowels}, {nrep}, {nbad}')
+    nice = nice + (npairs>0 and nrep>0)
+    
+print(str(nice) + ' nice children')
