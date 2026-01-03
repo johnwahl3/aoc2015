@@ -13,18 +13,18 @@ for instruction in instructions:
     xrange = [int(match[1]), int(match[3])+1]
     yrange = [int(match[2]), int(match[4])+1]
     if 'turn on' in instruction:
-        oper = op.__or__
+        oper = op.add
         val = 1
     elif 'turn off' in instruction:
-        oper = op.__and__
-        val = 0
+        oper = op.add
+        val = -1
     elif 'toggle' in instruction:
-        oper = op.__xor__
-        val = 1
+        oper = op.add
+        val = 2
 
     for row in range(yrange[0],yrange[1]):
-        lights[row][xrange[0]:xrange[1]] = [oper(x,val) for x in lights[row][xrange[0]:xrange[1]]]
+        lights[row][xrange[0]:xrange[1]] = [max(0,oper(x,val)) for x in lights[row][xrange[0]:xrange[1]]]
 
 total = sum(sum(row) for row in lights)
 
-print(str(total) + ' lights lit')
+print(str(total) + ' total brightness')
